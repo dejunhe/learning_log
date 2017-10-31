@@ -1,26 +1,23 @@
 from django.db import models
 
-
-# Create your models here.
 class Topic(models.Model):
-    '''用户学习主题'''
+    """A topic the user is learning about."""
     text = models.CharField(max_length=200)
-    date_added = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True) 
 
     def __str__(self):
-        '''返回模型的字符串表示'''
+        """Return a string representation of the model."""
         return self.text
 
-
 class Entry(models.Model):
-    '''学到的有关某个主题的具体知识'''
+    """Something specific learned about a topic."""
     topic = models.ForeignKey(Topic)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
-
+    
     class Meta:
         verbose_name_plural = 'entries'
-
+ 
     def __str__(self):
-        '''返回模型的有关主题的具体知识'''
+        """Return a string representation of the model."""
         return self.text[:50] + "..."
